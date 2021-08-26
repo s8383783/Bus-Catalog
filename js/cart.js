@@ -9,13 +9,16 @@ let cart;
 function loadCart() {
   const cartItems = JSON.parse(localStorage.getItem('cart')) || [];
   cart = new Cart(cartItems);
+  console.log("hi" , cartItems)
+  showCart(cartItems.items);
 }
+
 
 // Make magic happen --- re-pull the Cart, clear out the screen and re-draw it
 function renderCart() {
   loadCart();
   clearCart();
-  showCart();
+  // showCart();
 }
 
 // TODO: Remove all of the rows (tr) in the cart table (tbody)
@@ -24,22 +27,29 @@ function clearCart() {
 }
 
 // TODO: Fill in the <tr>'s under the <tbody> for each item in the cart
-function showCart() {
+function showCart(items) {
   let cartContentsTable = document.querySelector('tbody')
 // DONE: Find the table body
-for (let i = 0 ; i < 4; i ++){
+for (let i = 0 ; i < items.length; i ++){
   let tr = document.createElement('tr')
+  // tr.textContent = items[i].items
   cartContentsTable.appendChild(tr)
-  // tr.textContent = [i].name
+  tr.textContent = [i].name
   let td1 = document.createElement('td')
   tr.appendChild(td1)
-  td1.textContent = 'remove'
+  let a = document.createElement('a')
+  let linktext = document.createTextNode('X');
+  a.setAttribute("href", 'https://www.google.com/?client=safari');
+  td1.appendChild(a);
+  a.appendChild(linktext);
+  // a.textContent = 'remove'
+  // td1.textContent = 'X'
   let td2 = document.createElement('td')
   tr.appendChild(td2)
-  td2.textContent = 'quantity'
+  td2.textContent = items[i].quantity
   let td3 = document.createElement('td')
   tr.appendChild(td3)
-  td3.textContent = cart[i]
+  td3.textContent = items[i].items
 }
   // DONE: Iterate over the items in the cart
   // DONE: Create a TR
@@ -58,4 +68,4 @@ function removeItemFromCart(event) {
 
 // This will initialize the page and draw the cart on screen
 renderCart();
-showCart();
+
