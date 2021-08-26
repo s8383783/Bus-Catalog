@@ -32,7 +32,7 @@ function handleSubmit(event) {
   cart.saveToLocalStorage();
   updateCounter();
   updateCartPreview();
-
+  document.getElementById('catalog').reset();
 }
 
 // DONE: Add the selected item and quantity to the cart
